@@ -7,6 +7,7 @@ package gescommongo;
 
 
 import com.mongodb.BasicDBObject;
+import controller.ControllerCommande;
 import controller.ControllerProduit;
 import java.util.List;
 import model.Categorie;
@@ -69,8 +70,9 @@ public class GescomMongo {
        
        //Commande cmd2 = new Commande(4, "quentin","14/05/1993");
 
-        CommandeDAO cmdDAO = new CommandeDAO();
-        Commande cmd = new Commande(6, "Celine","20/08/1980");
+        //
+        
+        //Commande cmd = new Commande(6, "Celine","20/08/1980");
                 /*cmd.getListeProd()
                .add(new BasicDBObject("_id",1)  
                .append("nomProd","chocolat")
@@ -78,11 +80,38 @@ public class GescomMongo {
                .append("categorie", new BasicDBObject("_id", 1)
                     .append("libelle", "Livre"))*/
                 
-        //Produit produit = new Produit(6, "fraise", "au lait", 1, 1000 ,(new Categorie(2, "gros")));
-        //Produit produit = new Produit(6, "caramel", "au beurre salé", 1, 1000 ,(new Categorie(2, "gros")));
-        //Produit produit = new Produit(6, "vanille", "des iles", 1, 1000 ,(new Categorie(2, "gros")));
-        Produit produit = new Produit(6, "chantilly", "pour les glace de celine", 1, 600 ,(new Categorie(2, "gros")));
+       //Produit produit = new Produit(5, "fraise", "au lait", 1, 1000 ,(new Categorie(2, "gros")));
+        //Produit produit = new Produit(4, "caramel", "au beurre salé", 1, 1000 ,(new Categorie(2, "gros")));
+        //Produit produit = new Produit(3, "vanille", "des iles", 1, 1000 ,(new Categorie(2, "gros")));
+        //Produit produit = new Produit(6, "chantilly", "pour les glace de celine", 1, 600 ,(new Categorie(2, "gros")));
 
-       cmdDAO.actualiserCommande(cmd,produit);
-    }
+       //cmdDAO.actualiserCommande(cmd,produit);
+       //cmdDAO.supprimerProdCommande(cmd, produit);
+       
+       
+       //Commande cmd = new Commande(9, "sylvain","20/08/1980");
+       //cmdDAO.ajouterCommande(cmd);
+       //cmdDAO.supprimerCommande(cmd);
+       
+        //CommandeDAO cmdDAO = new CommandeDAO();
+        //Commande cmd = new Commande(4, "quentin","14/05/1993");
+       // Produit prod = new Produit(4, "chaocolat", "au lait", 1, 69 ,(new Categorie(2, "gros")));        
+                
+       // cmdDAO.modifierProdCmd(cmd, prod);
+       
+       
+       /* System.out.println(cmdDAO.getAllCommande());
+        List<Commande> listeCmd = cmdDAO.getAllCommande();
+        
+       for (Commande cmd : listeCmd){
+            System.out.println(cmd);
+            
+        }*/
+       
+        //System.out.println(cmdDAO.getOneCommande(4));+++++111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111
+        
+        
+
+        ControllerCommande cCmd = new ControllerCommande();
+}
 }

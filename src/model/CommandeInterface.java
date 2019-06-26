@@ -22,7 +22,8 @@ public interface CommandeInterface {
     public void actualiserCommande (Commande cmd, Produit prod);
     public List<Commande> getAllCommande();
     public Commande getOneCommande(int idCmd);
-    
+    public void modifierProdCmd (Commande cmd, Produit prod);
+    public List<Produit> getAllProdCmd ( Commande cmd);
     
 
 }
