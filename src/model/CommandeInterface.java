@@ -18,9 +18,11 @@ import java.util.List;
 public interface CommandeInterface {
     public void ajouterCommande(Commande cmd);
     public void supprimerCommande(Commande cmd);
+    public void supprimerProdCommande( Commande cmd, Produit prod);
     public void actualiserCommande (Commande cmd, Produit prod);
     public List<Commande> getAllCommande();
     public Commande getOneCommande(int idCmd);
+    
     
 
 }

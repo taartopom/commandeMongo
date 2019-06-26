@@ -70,18 +70,19 @@ public class GescomMongo {
        //Commande cmd2 = new Commande(4, "quentin","14/05/1993");
 
         CommandeDAO cmdDAO = new CommandeDAO();
-        Commande cmd = new Commande(1, "sandra","20/08/1990");
-        cmd.getListeProd()
+        Commande cmd = new Commande(6, "Celine","20/08/1980");
+                /*cmd.getListeProd()
                .add(new BasicDBObject("_id",1)  
                .append("nomProd","chocolat")
                .append("qteCmd",10)
                .append("categorie", new BasicDBObject("_id", 1)
-                    .append("libelle", "Livre"))
-               ); 
-        Produit produit = new Produit(6, "fraise", "au lait", 1, 1000 ,(new Categorie(2, "gros")));
+                    .append("libelle", "Livre"))*/
+                
+        //Produit produit = new Produit(6, "fraise", "au lait", 1, 1000 ,(new Categorie(2, "gros")));
+        //Produit produit = new Produit(6, "caramel", "au beurre salé", 1, 1000 ,(new Categorie(2, "gros")));
+        //Produit produit = new Produit(6, "vanille", "des iles", 1, 1000 ,(new Categorie(2, "gros")));
+        Produit produit = new Produit(6, "chantilly", "pour les glace de celine", 1, 600 ,(new Categorie(2, "gros")));
 
-
-       
        cmdDAO.actualiserCommande(cmd,produit);
     }
 }

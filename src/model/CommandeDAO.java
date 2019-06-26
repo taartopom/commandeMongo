@@ -5,9 +5,11 @@
  */
 package model;
 
+import com.mongodb.BasicDBList;
 import com.mongodb.BasicDBObject;
 import com.mongodb.DB;
 import com.mongodb.DBCollection;
+import com.mongodb.DBObject;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.JOptionPane;
@@ -33,6 +35,15 @@ public class CommandeDAO  implements CommandeInterface{
     private String nomClient;
     private String dateCmd;
     private List<BasicDBObject> listeProd;*/
+    @Override
+    public List<Commande> getAllCommande() {
+        return null;
+    }
+
+    @Override
+    public Commande getOneCommande(int idCmd) {
+     return null;   
+    }
     
     @Override
     public void ajouterCommande(Commande cmd) {
@@ -57,21 +68,30 @@ public class CommandeDAO  implements CommandeInterface{
     
     @Override
     public void actualiserCommande(Commande cmd, Produit prod) {
-        //ajout du nouveau produit a la liste des produit dans la commande
-       cmd.getListeProd().add(new BasicDBObject("_id", cmd.getIdCmd())
+       // List<BasicDBObject> listProdCmd new ArrayList<>;
+       
+        //creation de l'ancienne commande en reccuperant l'id
+        BasicDBObject docCmdOld = new BasicDBObject("_id", cmd.getIdCmd());
+        
+        //recherche de la commande
+        DBObject obj = this.collectionCmd.findOne(docCmdOld);
+        // recuperation de la liste des produits de la commande existante
+        BasicDBList listprod = (BasicDBList) obj.get("contenir");
+        
+
+        //ajout du nouveau produit à la listprod
+        BasicDBObject newProd = new BasicDBObject("_id",prod.getIdProd())
             .append("nomProd", prod.getNomProd())
             .append("qteCmd",prod.getQteProd())
             .append("categorie", new BasicDBObject("_id", prod.getCatProd().getIdCat())
-                    .append("libelle",prod.getCatProd().getLibelle()))
-       );
-        //creation de l'ancienne commande en reccuperant l'id
-        BasicDBObject docCmdOld = new BasicDBObject("_id", cmd.getIdCmd());
+                    .append("libelle",prod.getCatProd().getLibelle()) );
+        listprod.add(newProd);
         
         //création de la nouvelle commande
         BasicDBObject docCmdNew = new BasicDBObject("_id", cmd.getIdCmd())
             .append("nomClient", cmd.getNomClient())
             .append("date",cmd.getDateCmd())
-            .append("contenir",cmd.getListeProd());
+            .append("contenir",listprod);
         
         //actualisation de la commande
         this.collectionCmd.update(docCmdOld,docCmdNew);
@@ -79,14 +99,35 @@ public class CommandeDAO  implements CommandeInterface{
         JOptionPane.showMessageDialog(null,"Opération effectuée avec succes");    }
 
 
-    @Override
-    public List<Commande> getAllCommande() {
-        return null;
-    }
+
 
     @Override
-    public Commande getOneCommande(int idCmd) {
-     return null;   
-    }
-    
+    public void supprimerProdCommande(Commande cmd, Produit prod) {
+       
+        //creation de l'ancienne commande en reccuperant l'id
+        BasicDBObject docCmdOld = new BasicDBObject("_id", cmd.getIdCmd());
+        
+        //recherche de la commande
+        DBObject obj = this.collectionCmd.findOne(docCmdOld);
+        // recuperation de la liste des produits de la commande existante
+        BasicDBList listprod = (BasicDBList) obj.get("contenir");
+            for (int i= 0; i<listprod.size();i++){
+                DBObject objProd = (DBObject)listprod.get(i);
+                if (objProd.get("_id").equals(prod.getIdProd())){
+                    listprod.remove(i);
+                    
+                }
+            }
+        //création de la nouvelle commande
+        BasicDBObject docCmdNew = new BasicDBObject("_id", cmd.getIdCmd())
+            .append("nomClient", cmd.getNomClient())
+            .append("date",cmd.getDateCmd())
+            .append("contenir",listprod);
+        
+        //actualisation de la commande
+        this.collectionCmd.update(docCmdOld,docCmdNew);
+
+        JOptionPane.showMessageDialog(null,"Opération effectuée avec succes");    
+    }    
 }
+
